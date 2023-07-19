@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "first_name": "Catarina",
+    "last_name": "Brayshaw",
+    "email": "cbrayshaw0@unblog.fr",
+    "gender": "Female"
+  },
+  {
+    "id": 2,
+    "first_name": "Thedric",
+    "last_name": "Thorpe",
+    "email": "tthorpe1@washington.edu",
+    "gender": "Male"
+  },
+  {
+    "id": 3,
+    "first_name": "Tremain",
+    "last_name": "Fairbrass",
+    "email": "tfairbrass2@quantcast.com",
+    "gender": "Male"
+  },
+  {
+    "id": 4,
+    "first_name": "Dosi",
+    "last_name": "Scardefield",
+    "email": "dscardefield3@tmall.com",
+    "gender": "Female"
+  },
+  {
+    "id": 5,
+    "first_name": "Gardy",
+    "last_name": "Domesday",
+    "email": "gdomesday4@sun.com",
+    "gender": "Male"
+  },
+  {
+    "id": 6,
+    "first_name": "Alessandro",
+    "last_name": "Anersen",
+    "email": "aanersen5@nsw.gov.au",
+    "gender": "Male"
+  },
+  {
+    "id": 7,
+    "first_name": "Caye",
+    "last_name": "Gownge",
+    "email": "cgownge6@ibm.com",
+    "gender": "Female"
+  }
+]
