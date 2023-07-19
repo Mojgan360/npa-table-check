@@ -5,6 +5,7 @@ import Singel from "./Singel";
 import HappyIcone from "./HappyIcone";
 import SortTable from "./SortTable";
 import FilteringTable from "./FilteringTable";
+import { SearchColumn } from "./SearchColumn";
 
 const Columns = () => {
   const [Data, setData] = React.useState([]);
@@ -28,72 +29,120 @@ const Columns = () => {
           {
             Header: "Name",
             accessor: "show.name",
-            // getProps: (rowInfo) => {
-            //   return {
-            //     style: {
-            //       color: rowInfo && rowInfo.row.item === "blue" ? "red" : null,
-            //     },
-            //   };
-            // },
+            Filter: SearchColumn,
           },
           {
             Header: "Type",
             accessor: "show.type",
-          },
-          {
-            Header: "IMG",
-            accessor: "show.image.medium",
-            Cell: ({ cell: { value } }) => (
-              <img src={value} width={60} alt="Player" />
-            ),
+            disableSortBy: true, // Disable sorting for this column
+            disableFilters: true,
           },
           {
             Header: "Language",
             accessor: "show.language",
-            Cell: (props) => {
-              return <Singel {...props} />;
-            },
           },
           {
             Header: "Official Site",
             accessor: "show.officialSite",
-            //  Cell: ({ cell: { value } }) => value || "-",
-            Cell: (props) => {
-              return <HappyIcone {...props} />;
-            },
           },
           {
             Header: "Rating",
             accessor: "show.rating.average",
-            Cell: ({ cell: { value } }) => value || "-",
-            // Cell: (props) => {
-            //   console.log(props.test); // the value is 'this is a test'
-            //   return <Singel test={props.test} />;
-            // },
           },
           {
             Header: "Status",
             accessor: "show.status",
           },
-        ],
-      },
-      {
-        Header: "Info Show",
-        columns: [
           {
             Header: "Premiered",
             accessor: "show.premiered",
-            // Cell: ({ cell: { value } }) => value || "-",
           },
           {
             Header: "Time",
             accessor: "show.schedule.time",
-            // Cell: ({ cell: { value } }) => value || "-",
           },
         ],
       },
     ];
   }, []);
+
+  // const columns = React.useMemo(() => {
+  //   return [
+  //     {
+  //       Header: "TV Show",
+  //       columns: [
+  //         {
+  //           Header: "Name",
+  //           accessor: "show.name",
+  //           // getProps: (rowInfo) => {
+  //           //   return {
+  //           //     style: {
+  //           //       color: rowInfo && rowInfo.row.item === "blue" ? "red" : null,
+  //           //     },
+  //           //   };
+  //           // },
+  //         },
+  //         {
+  //           Header: "Type",
+  //           accessor: "show.type",
+  //           Filter: SearchColumn,
+  //         },
+  //         {
+  //           Header: "IMG",
+  //           accessor: "show.image.medium",
+  //           Cell: ({ cell: { value } }) => (
+  //             <img src={value} width={60} alt="Player" />
+  //           ),
+  //         },
+  //         {
+  //           Header: "Language",
+  //           accessor: "show.language",
+  //           Filter: SearchColumn,
+
+  //           Cell: (props) => {
+  //             return <Singel {...props} />;
+  //           },
+  //         },
+  //         {
+  //           Header: "Official Site",
+  //           accessor: "show.officialSite",
+  //           //  Cell: ({ cell: { value } }) => value || "-",
+  //           Cell: (props) => {
+  //             return <HappyIcone {...props} />;
+  //           },
+  //         },
+  //         {
+  //           Header: "Rating",
+  //           accessor: "show.rating.average",
+  //           Cell: ({ cell: { value } }) => value || "-",
+  //           // Cell: (props) => {
+  //           //   console.log(props.test); // the value is 'this is a test'
+  //           //   return <Singel test={props.test} />;
+  //           // },
+  //         },
+  //         {
+  //           Header: "Status",
+  //           accessor: "show.status",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       Header: "Info Show",
+  //       columns: [
+  //         {
+  //           Header: "Premiered",
+  //           accessor: "show.premiered",
+  //           // Cell: ({ cell: { value } }) => value || "-",
+  //         },
+  //         {
+  //           Header: "Time",
+  //           accessor: "show.schedule.time",
+  //           // Cell: ({ cell: { value } }) => value || "-",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // }, []);
   return (
     <div>
       <FilteringTable columns={columns} data={Data} />
@@ -103,7 +152,7 @@ const Columns = () => {
         data={Data.map((item) => JSON.stringify(item))}
       /> */}
       {/* <SortTable columns={columns} data={Array.isArray(Data) ? Data : []} />; */}
-      <SortTable columns={columns} data={Data} />
+      {/* <SortTable columns={columns} data={Data} /> */}
     </div>
   );
 };

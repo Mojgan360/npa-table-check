@@ -1,11 +1,23 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useTable, useSortBy, useGlobalFilter } from "react-table";
+import React from "react";
+
+import { useTable, useSortBy, useGlobalFilter, useFilters } from "react-table";
 import SearchInput from "./SearchInput";
-// import { COLUMNS, cols } from "./Columns";
+import { SearchColumn } from "./SearchColumn";
+
 const FilteringTable = ({ columns, data }) => {
   console.log("columns:", columns);
   console.log("data:", data);
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: SearchColumn,
+    }),
+    []
+  );
 
   const {
     getTableProps,
@@ -19,9 +31,11 @@ const FilteringTable = ({ columns, data }) => {
     {
       columns,
       data,
+      defaultColumn,
       autoResetHiddenColumns: false, //  <-- stops the rerendering
       autoResetSortBy: false, //  <-- stops the rerendering
     },
+    useFilters,
     useGlobalFilter,
     useSortBy
   );
@@ -42,21 +56,25 @@ const FilteringTable = ({ columns, data }) => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column, i) => (
                     // Apply the header cell props
-                    <th
-                      key={i}
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {
-                        // Render the header
-                        column.render("Header")
-                      }
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? "1"
-                            : "2"
-                          : ""}
-                      </span>
+
+                    <th>
+                      <div
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
+                      >
+                        {column.render("Header")}
+                        <span>
+                          {column.isSorted
+                            ? column.isSortedDesc
+                              ? " 🔽"
+                              : " 🔼"
+                            : ""}
+                        </span>
+                      </div>
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}
+                      </div>
                     </th>
                   ))
                 }
