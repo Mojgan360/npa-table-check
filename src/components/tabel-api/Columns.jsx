@@ -4,6 +4,7 @@ import axios from "axios";
 import Singel from "./Singel";
 import HappyIcone from "./HappyIcone";
 import SortTable from "./SortTable";
+import FilteringTable from "./FilteringTable";
 
 const Columns = () => {
   const [Data, setData] = React.useState([]);
@@ -95,6 +96,7 @@ const Columns = () => {
   }, []);
   return (
     <div>
+      <FilteringTable columns={columns} data={Data} />
       {/* <SortTable columns={columns} data={Data} /> */}
       {/* <SortTable
         columns={columns}
