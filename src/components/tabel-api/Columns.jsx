@@ -7,6 +7,7 @@ import SortTable from "./SortTable";
 import FilteringTable from "./FilteringTable";
 import { SearchColumn } from "./SearchColumn";
 import ResizableColumnTable from "./ResizableColumnTable";
+import ResizeTableAllFilter from "./ResizeTableAllFilter";
 
 const Columns = () => {
   const [Data, setData] = React.useState([]);
@@ -149,8 +150,9 @@ const Columns = () => {
   // }, []);
   return (
     <div>
-      <ResizableColumnTable columns={columns} data={Data} />
-      <FilteringTable columns={columns} data={Data} />
+      <ResizeTableAllFilter columns={columns} data={Data} />
+      {/* <ResizableColumnTable columns={columns} data={Data} />
+      <FilteringTable columns={columns} data={Data} /> */}
       {/* <SortTable columns={columns} data={Data} /> */}
       {/* <SortTable
         columns={columns}

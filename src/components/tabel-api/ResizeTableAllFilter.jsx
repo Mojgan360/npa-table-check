@@ -30,7 +30,7 @@ const Styles = styled.div`
     border-bottom: 1px solid black;
   }
 
-  .tab {
+  table {
     /* Make sure the inner table is always as wide as needed */
     width: 100%;
     border-spacing: 0;
@@ -43,8 +43,8 @@ const Styles = styled.div`
       }
     }
 
-    .th,
-    .td {
+    th,
+    td {
       margin: 0;
       padding: 0.5rem;
       border-bottom: 1px solid black;
@@ -83,7 +83,7 @@ const Styles = styled.div`
   }
 `;
 
-const FilteringTable = ({ columns, data }) => {
+const ResizeTableAllFilter = ({ columns, data }) => {
   console.log("columns:", columns);
   console.log("data:", data);
 
@@ -119,7 +119,7 @@ const FilteringTable = ({ columns, data }) => {
     useSortBy,
     useBlockLayout,
     useResizeColumns
-    // useFlexLayout
+    //useFlexLayout
   );
 
   const { globalFilter } = state;
@@ -128,47 +128,78 @@ const FilteringTable = ({ columns, data }) => {
     <Styles>
       <SearchInput filter={globalFilter} setFilter={setGlobalFilter} />
       <div className="tableWrap">
-        <div {...getTableProps()} className="tableWrap">
-          <div>
+        <table {...getTableProps()} className="customers">
+          <thead>
             {
               // Loop over the header rows
               headerGroups.map((headerGroup, i) => (
                 // Apply the header row props
-                <div key={i} {...headerGroup.getHeaderGroupProps()}>
+                <tr
+                  key={i}
+                  {...headerGroup.getHeaderGroupProps()}
+                  className="tr"
+                >
                   {headerGroup.headers.map((column, i) => (
-                    <div>
-                      <div
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                      >
+                    <th {...column.getHeaderProps()}>
+                      <div {...column.getSortByToggleProps()}>
                         {column.render("Header")}
-                        <div
-                          {...column.getResizerProps()}
-                          className={`resizer ${
-                            column.isResizing ? "isResizing" : ""
-                          }`}
-                        />
                         <span>
                           {column.isSorted
                             ? column.isSortedDesc
                               ? " 🔽"
                               : " 🔼"
                             : ""}
-                        </span>{" "}
-                        *
+                        </span>
+                      </div>
+                      <div
+                        {...column.getResizerProps()}
+                        className={`resizer ${
+                          column.isResizing ? "isResizing" : ""
+                        }`}
+
+                        // className={[
+                        //   styles.ResizeHandle,
+                        //   column.isResizing && styles.ResizeHandleActive,
+                        // ]
+                        //   .filter((x) => x)
+                        //   .join(" ")}
+                      >
+                        &#x22EE;
                       </div>
                       <div>
                         {column.canFilter ? column.render("Filter") : null}
                       </div>
-                    </div>
+                    </th>
+                    // <th
+                    //   key={i}
+                    //   {...column.getHeaderProps(column.getSortByToggleProps())}
+                    //   className=""
+                    // >
+                    //   {column.render("Header")}
+                    //   <div
+                    //     {...column.getResizerProps()}
+                    //     className={`resizer ${
+                    //       column.isResizing ? "isResizing" : ""
+                    //     }`}
+                    //   />
+                    //   <span>
+                    //     {column.isSorted
+                    //       ? column.isSortedDesc
+                    //         ? " 🔽"
+                    //         : " 🔼"
+                    //       : ""}
+                    //   </span>
+                    //   <div>
+                    //     {column.canFilter ? column.render("Filter") : null}
+                    //   </div>
+                    // </th>
                   ))}
-                </div>
+                </tr>
               ))
             }
-          </div>
+          </thead>
           {/* Apply the table body props */}
-          <div {...getTableBodyProps()}>
+          <tbody {...getTableBodyProps()}>
             {
               // Loop over the table rows
               rows.map((row, i) => {
@@ -176,7 +207,7 @@ const FilteringTable = ({ columns, data }) => {
                 prepareRow(row);
                 return (
                   // Apply the row props
-                  <div key={i} {...row.getRowProps()}>
+                  <tr key={i} {...row.getRowProps()} className="tr">
                     {
                       // Loop over the rows cells
                       //  {rows.cells.map(cell => cell.render('Cell', { test: 'this is a test'}))}
@@ -184,7 +215,7 @@ const FilteringTable = ({ columns, data }) => {
                       row.cells.map((cell, i) => {
                         // Apply the cell props
                         return (
-                          <div
+                          <td
                             key={i}
                             {...cell.getCellProps()}
                             // onClick={() => handelGender(cell)}
@@ -194,19 +225,19 @@ const FilteringTable = ({ columns, data }) => {
                               // Render the cell contents
                               cell.render("Cell", { test: "this is a test" })
                             }
-                          </div>
+                          </td>
                         );
                       })
                     }
-                  </div>
+                  </tr>
                 );
               })
             }
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </Styles>
   );
 };
 
-export default FilteringTable;
+export default ResizeTableAllFilter;
