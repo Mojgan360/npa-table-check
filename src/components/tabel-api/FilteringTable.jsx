@@ -3,7 +3,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-import { useTable, useSortBy, useGlobalFilter, useFilters } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  useFilters,
+  useResizeColumns,
+  useFlexLayout,
+  useBlockLayout,
+} from "react-table";
 import SearchInput from "./SearchInput";
 import { SearchColumn } from "./SearchColumn";
 
@@ -15,6 +23,9 @@ const FilteringTable = ({ columns, data }) => {
     () => ({
       // Let's set up our default Filter UI
       Filter: SearchColumn,
+      minWidth: 30,
+      width: 150,
+      maxWidth: 100,
     }),
     []
   );
@@ -37,7 +48,12 @@ const FilteringTable = ({ columns, data }) => {
     },
     useFilters,
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    //useBlockLayout,
+    useResizeColumns
+
+    // useBlockLayout
+    // useFlexLayout
   );
 
   const { globalFilter } = state;
@@ -45,6 +61,7 @@ const FilteringTable = ({ columns, data }) => {
   return (
     <>
       <SearchInput filter={globalFilter} setFilter={setGlobalFilter} />
+
       <table {...getTableProps()} className="customers">
         <thead>
           {
@@ -56,22 +73,19 @@ const FilteringTable = ({ columns, data }) => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column, i) => (
                     // Apply the header cell props
+                    <th
+                      key={i}
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      {column.render("Header")}
 
-                    <th>
-                      <div
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                      >
-                        {column.render("Header")}
-                        <span>
-                          {column.isSorted
-                            ? column.isSortedDesc
-                              ? " 🔽"
-                              : " 🔼"
-                            : ""}
-                        </span>
-                      </div>
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " 🔽"
+                            : " 🔼"
+                          : ""}
+                      </span>
                       <div>
                         {column.canFilter ? column.render("Filter") : null}
                       </div>

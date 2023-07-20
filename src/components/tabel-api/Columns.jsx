@@ -6,6 +6,7 @@ import HappyIcone from "./HappyIcone";
 import SortTable from "./SortTable";
 import FilteringTable from "./FilteringTable";
 import { SearchColumn } from "./SearchColumn";
+import ResizableColumnTable from "./ResizableColumnTable";
 
 const Columns = () => {
   const [Data, setData] = React.useState([]);
@@ -30,12 +31,13 @@ const Columns = () => {
             Header: "Name",
             accessor: "show.name",
             Filter: SearchColumn,
+            width: 150,
           },
           {
             Header: "Type",
             accessor: "show.type",
-            disableSortBy: true, // Disable sorting for this column
-            disableFilters: true,
+            // disableSortBy: true, // Disable sorting for this column
+            // disableFilters: true,
           },
           {
             Header: "Language",
@@ -44,6 +46,7 @@ const Columns = () => {
           {
             Header: "Official Site",
             accessor: "show.officialSite",
+            width: 500,
           },
           {
             Header: "Rating",
@@ -60,6 +63,7 @@ const Columns = () => {
           {
             Header: "Time",
             accessor: "show.schedule.time",
+            collapse: true,
           },
         ],
       },
@@ -145,7 +149,8 @@ const Columns = () => {
   // }, []);
   return (
     <div>
-      <FilteringTable columns={columns} data={Data} />
+      <ResizableColumnTable columns={columns} data={Data} />
+      {/* <FilteringTable columns={columns} data={Data} /> */}
       {/* <SortTable columns={columns} data={Data} /> */}
       {/* <SortTable
         columns={columns}
