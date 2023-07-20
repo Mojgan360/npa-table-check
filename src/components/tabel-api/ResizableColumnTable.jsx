@@ -147,10 +147,13 @@ const ResizableColumnTable = ({ columns, data }) => {
         columns,
         data,
         defaultColumn,
+        autoResetHiddenColumns: false,
+        autoResetSortBy: false,
       },
       useFlexLayout,
       useResizeColumns
     );
+
   return (
     <Styles>
       <div className="tableWrap">
@@ -161,6 +164,7 @@ const ResizableColumnTable = ({ columns, data }) => {
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()} className="th">
                     {column.render("Header")}
+
                     <div
                       {...column.getResizerProps()}
                       className={`resizer ${

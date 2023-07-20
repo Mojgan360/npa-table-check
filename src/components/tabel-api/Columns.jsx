@@ -150,7 +150,7 @@ const Columns = () => {
   return (
     <div>
       <ResizableColumnTable columns={columns} data={Data} />
-      {/* <FilteringTable columns={columns} data={Data} /> */}
+      <FilteringTable columns={columns} data={Data} />
       {/* <SortTable columns={columns} data={Data} /> */}
       {/* <SortTable
         columns={columns}
