@@ -148,7 +148,7 @@ const ResizeTableAllFilter = ({ columns, data }) => {
                             ? column.isSortedDesc
                               ? " 🔽"
                               : " 🔼"
-                            : ""}
+                            : "🔽🔼"}
                         </span>
                       </div>
                       <div
@@ -156,13 +156,6 @@ const ResizeTableAllFilter = ({ columns, data }) => {
                         className={`resizer ${
                           column.isResizing ? "isResizing" : ""
                         }`}
-
-                        // className={[
-                        //   styles.ResizeHandle,
-                        //   column.isResizing && styles.ResizeHandleActive,
-                        // ]
-                        //   .filter((x) => x)
-                        //   .join(" ")}
                       >
                         &#x22EE;
                       </div>
@@ -170,29 +163,6 @@ const ResizeTableAllFilter = ({ columns, data }) => {
                         {column.canFilter ? column.render("Filter") : null}
                       </div>
                     </th>
-                    // <th
-                    //   key={i}
-                    //   {...column.getHeaderProps(column.getSortByToggleProps())}
-                    //   className=""
-                    // >
-                    //   {column.render("Header")}
-                    //   <div
-                    //     {...column.getResizerProps()}
-                    //     className={`resizer ${
-                    //       column.isResizing ? "isResizing" : ""
-                    //     }`}
-                    //   />
-                    //   <span>
-                    //     {column.isSorted
-                    //       ? column.isSortedDesc
-                    //         ? " 🔽"
-                    //         : " 🔼"
-                    //       : ""}
-                    //   </span>
-                    //   <div>
-                    //     {column.canFilter ? column.render("Filter") : null}
-                    //   </div>
-                    // </th>
                   ))}
                 </tr>
               ))
